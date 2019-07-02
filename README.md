@@ -1,4 +1,3 @@
-![Local Addon: Ports Screenshot](/screenshot.png?raw=true)
 # Toybox for Local [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/getflywheel/local-addon-ports/pulls/)
 
 ## Installation
