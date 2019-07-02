@@ -18,7 +18,7 @@ export default function (context) {
   let globalSitePath;
 
   const addToken = (token) => {
-    const wpPluginFilename = 'test.php';
+    const wpPluginFilename = 'toybox.php';
     const wpPluginPath = path.join( context.electron.remote.process.resourcesPath , wpPluginFilename);
 
     const sitePath = globalSitePath;
@@ -29,7 +29,7 @@ export default function (context) {
       if (err) throw err;
 
       // fs.writeFileSync(path, `<?php  echo "<script src='http://localhost:3000/js/inject.bundle.js' async data-id='ToyboxSnippet' data-token='${token}'></script>"; ?>`)
-      fs.writeFileSync(path, `<?php  echo "<script src='https://d16ahjtmf9d1au.cloudfront.net/inject.bundle.js' async data-id='ToyboxSnippet' data-token='${token}'></script>"; ?>`)
+      fs.writeFileSync(path, `<?php add_action('wp_head','toybox_installation');function toybox_installation(){if(!is_admin()){echo '<script src="https://d16ahjtmf9d1au.cloudfront.net/inject.bundle.js" async data-id="ToyboxSnippet" data-token="${token}"></script>';}} ?>`)
       fs.copySync(path, pluginFilePath);
     });
   }
@@ -47,7 +47,7 @@ export default function (context) {
 
 	hooks.addFilter('siteInfoMoreMenu', function (menu, site) {
 
-    const wpPluginFilename = 'test.php';
+    const wpPluginFilename = 'toybox.php';
     const wpPluginPath = path.join( context.electron.remote.process.resourcesPath , wpPluginFilename);
 
     const sitePath = `${formatHomePath(site.path)}/`;
@@ -57,7 +57,7 @@ export default function (context) {
     globalSitePath = sitePath
 
 		menu.push({
-			label: 'Website Feedback (Toybox)',
+			label: 'Toybox',
 			enabled: !this.context.router.isActive(`/site-info/${site.id}/ports`),
 			click: () => {
 				context.events.send('goToRoute', `/site-info/${site.id}/ports`);
