@@ -98,24 +98,24 @@ export default class App extends React.Component {
   render () {
     const signIn = (
       <div>
-        <Header>Email</Header>
-        <div className='PasswordToggle'>
-          <input className='PasswordToggleInput' onChange={(e) => this.setState({ email: e.target.value })} />
+      <div className="FormRow">
+        <div className='FormField'>
+          <label>Email</label>
+          <input onChange={(e) => this.setState({ email: e.target.value })} />
         </div>
-        <Box pt='12' flex>
-          <Header>API Token</Header>
-        </Box>
-        <InputPasswordToggle onChange={(e) => this.setState({ password: e.target.value })} />
-        <Text pt='4'>You can find your Token <a href='https://app.toyboxsystems.com/settings?api=true' target='_blank'>here</a></Text>
+      </div>
+      <div className="FormRow">
+      <div className='FormField'>
+          <label>API Token <a href='https://app.toyboxsystems.com/settings?api=true' target='_blank'><img src="https://img.icons8.com/ios-glyphs/30/000000/external-link.png" height="16px" width="16px" /></a></label>
+          <InputPasswordToggle onChange={(e) => this.setState({ password: e.target.value })} />
+        </div>
+      </div>
         <Box pt='12'>
           <Button onClick={this.signIn} className="__Pill __Green">Sign In</Button>
         </Box>
         {
           this.state.error && <Text warning>Error logging in</Text>
         }
-        <Box pt='12'>
-          <a target='_blank' href='https://app.toyboxsystems.com?flywheel'>Don't have a Toybox account yet? Click Here</a>
-        </Box>
       </div>
     );
 
@@ -135,7 +135,8 @@ export default class App extends React.Component {
   	const signOut = <Button onClick={this.signOut} className="__GrayOutline">Sign Out From Toybox</Button>;
 
   	let view = signIn;
-  	let description = 'Sign in to get started';
+    let title = 'Configure Toybox';
+    let description = <p>Sign in with your Toybox account or <a target='_blank' href='https://app.toyboxsystems.com?flywheel'>create one for free</a></p>;
 
   	// <div>
   	//   {this.props.emai}
@@ -148,10 +149,11 @@ export default class App extends React.Component {
   		if (this.props.projects.length == 0) {
   			view = <BigLoader />;
   		} else {
-  			description = 'Configure below to start leaving feedback';
+  			description = 'Link a project to start leaving feedback:';
         const project = _.keyBy(this.props.projects, 'hashId')[this.state.projectToken]
         let projectDetails;
         if (project) {
+          let title = 'Project';
           projectDetails = (
             <Box>
               <Box flex aic pb='8'>
@@ -174,7 +176,6 @@ export default class App extends React.Component {
         view = (
   				<div>
   					<div>
-  						<Header>Project</Header>
   						{projectSelect}
               {projectDetails}
   					</div>
@@ -192,12 +193,8 @@ export default class App extends React.Component {
   	return (
   		<div style={{ padding: 12, flex: '1', overflowY: 'auto' }}>
   			<Card
-  				headerBackgroundColor="#51bb7b"
-  				headerIconPath="https://cdn1.iconfinder.com/data/icons/black-white-social-media/32/Trulia_social_media_logo-128.png"
-  				headerIconMaxHeight="50px"
-  				contentTitle="Toybox"
-  				contentSub=""
-  				contentDescription={description}
+          contentTitle={title}
+          contentDescription={description}
   				footer={(
   					<Fragment>
   						{view}
