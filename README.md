@@ -1,16 +1,15 @@
-# Synopsis [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/getflywheel/local-addon-ports/pulls/)
-
 ![Local Addon: Ports Screenshot](/screenshot.png?raw=true)
+# Toybox for Local [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/getflywheel/local-addon-ports/pulls/)
 
 ## Installation
 
 ### Requirements
 
-* Local 2.3.0 or newer
+* Local 3.2.1 or newer
 
 ### Downloading
 
-1. Download the [latest version](https://github.com/getflywheel/local-addon-ports/archive/master.zip)
+1. Download the [latest version](https://github.com/toyboxsystems/toybox-flywheel)
 2. Go to Settings » Add-ons inside Local (1.1.0 or newer) and click on Install Add-on
 3. Browse to the downloaded release
 4. Check the checkbox by the Ports addon to enable it
