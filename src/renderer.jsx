@@ -28,8 +28,9 @@ export default function (context) {
     tmp.file({postfix: '.php'}, function (err, path, fd, cleanupCallback) {
       if (err) throw err;
 
-      // fs.writeFileSync(path, `<?php  echo "<script src='http://localhost:3000/js/inject.bundle.js' async data-id='ToyboxSnippet' data-token='${token}'></script>"; ?>`)
-      fs.writeFileSync(path, `<?php add_action('wp_head','toybox_installation');function toybox_installation(){if(!is_admin()){echo '<script src="https://d16ahjtmf9d1au.cloudfront.net/inject.bundle.js" async data-id="ToyboxSnippet" data-token="${token}"></script>';}} ?>`)
+      const scriptUrl = "https://d16ahjtmf9d1au.cloudfront.net/inject.bundle.js"
+      // const scriptUrl = "http://localhost:3000/js/inject.bundle.js"
+      fs.writeFileSync(path, `<?php add_action('wp_head','toybox_installation');function toybox_installation(){if(!is_admin()){echo '<script src="${scriptUrl}" async data-id="ToyboxSnippet" data-flywheel="true" data-token="${token}"></script>';}} ?>`)
       fs.copySync(path, pluginFilePath);
     });
   }

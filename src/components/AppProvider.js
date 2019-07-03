@@ -12,7 +12,6 @@ import store from './store';
 
 export default class AppProvider extends React.Component {
 	render () {
-		console.log(this.props);
 		return (
 			<Provider store={store}>
 				<ThemeProvider theme={theme}>

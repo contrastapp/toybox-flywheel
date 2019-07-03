@@ -3,6 +3,7 @@ import store from '../components/store';
 
 export function request (params) {
 	let baseUrl = 'https://app.toyboxsystems.com';
+	// let baseUrl = 'http://localhost:3001';
 
 	// if (process.env.NODE_ENV === 'development') {
 	//   baseUrl = 'http://localhost:3001';

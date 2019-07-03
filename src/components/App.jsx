@@ -76,7 +76,6 @@ export default class App extends React.Component {
 
   setProject = () => {
   	const context = this.props.context;
-    console.log(context)
     const projectToken = this.state.tempProjectToken
     this.setState({projectToken})
     this.props.addToken(projectToken)
@@ -89,7 +88,6 @@ export default class App extends React.Component {
   		projects[project.hashId] = {
   			label: project.name,
   			secondaryText: project.companyName,
-  			// icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 13h10a1 1 0 1 0 0-2H13V1a1 1 0 0 0-2 0v10H1a1 1 0 1 0 0 2h10v10a1 1 0 1 0 2 0z"></path></svg>,
   		};
   	});
   	return projects;
@@ -138,13 +136,6 @@ export default class App extends React.Component {
     let title = 'Configure Toybox';
     let description = <p>Sign in with your Toybox account or <a target='_blank' href='https://app.toyboxsystems.com?flywheel'>create one for free</a></p>;
 
-  	// <div>
-  	//   {this.props.emai}
-  	//   <Divider />
-  	//   {this.props.project}
-  	// <Switch onChange={() => console.log('onChange')}/>
-  	// </div>
-
   	if (this.props.authed) {
   		if (this.props.projects.length == 0) {
   			view = <BigLoader />;
@@ -156,13 +147,18 @@ export default class App extends React.Component {
           let title = 'Project';
           projectDetails = (
             <Box>
-              <Box flex aic pb='8'>
+              <Box pb='8' flex aic>
                 <Box>
-                  Project: {project.name}
+                  Project:
                 </Box>
                 <Box pl='4'>
-                  [{project.companyName}]
+                  <a href={project.dashboardUrl} target="_blank"> {project.name}
+                    <img src="https://img.icons8.com/ios-glyphs/30/000000/external-link.png" height="14px" width="14px" />
+                  </a>
                 </Box>
+              </Box>
+              <Box pb='8'>
+                Organization: {project.companyName}
               </Box>
               <Box pb='8'>
                 Last Updated: {project.updatedAt}
@@ -179,11 +175,6 @@ export default class App extends React.Component {
   						{projectSelect}
               {projectDetails}
   					</div>
-  					<div style={{ marginLeft: 'auto' }}>
-              <Box pt='48'>
-                {signOut}
-              </Box>
-  					</div>
   				</div>
   			);
   		}
@@ -193,12 +184,21 @@ export default class App extends React.Component {
   	return (
   		<div style={{ padding: 12, flex: '1', overflowY: 'auto' }}>
   			<Card
-          contentTitle={title}
+          contentTitle={
+            <Box flex aic between>
+              {
+                title
+              }
+              <Box>
+                {this.props.authed && signOut}
+              </Box>
+            </Box>
+          }
           contentDescription={description}
-  				footer={(
+          footer={(
   					<Fragment>
   						{view}
-  					</Fragment>
+            </Fragment>
   				)}
   			/>
   		</div>
