@@ -1,24 +1,16 @@
 {
-  "name": "local-addon-ports",
-  "productName": "Ports Manager",
+  "name": "toybox",
+  "productName": "Toybox",
   "version": "1.1.0",
-  "author": "Flywheel",
+  "author": "MAHKO CORP. d/b/a Toybox",
   "slug": "ports",
   "keywords": [
     "local-addon"
   ],
   "bgColor": "#ddeefd",
   "icon": "icon.svg",
-  "description": "Add, remove, and modify port mappings for Local by Flywheel site containers.",
+  "description": "Leave feedback using the Toybox snippet.",
   "renderer": "lib/renderer.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/getflywheel/local-addon-ports"
-  },
-  "bugs": {
-    "url": "https://github.com/getflywheel/local-addon-ports/issues"
-  },
-  "license": "MIT",
   "scripts": {
     "build": "babel src -d lib",
     "prepare": "npm run build",
@@ -42,6 +34,7 @@
     "axios": "^0.19.0",
     "fs-extra": "^8.0.1",
     "lodash": "^4.17.11",
+    "lodash-inflection": "^1.5.0",
     "path": "^0.12.7",
     "react": "^15.6.2",
     "react-redux": "^5.0.6",

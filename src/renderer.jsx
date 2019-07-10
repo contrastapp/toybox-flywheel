@@ -20,11 +20,9 @@ export default function (context) {
   const addToken = (token) => {
     const wpPluginFilename = 'toybox.php';
     const wpPluginPath = path.join( context.electron.remote.process.resourcesPath , wpPluginFilename);
-
     const sitePath = globalSitePath;
     const muPluginsPath = path.join(sitePath, 'app', 'public','wp-content', 'mu-plugins');
     const pluginFilePath = path.join(muPluginsPath, wpPluginFilename);
-
     tmp.file({postfix: '.php'}, function (err, path, fd, cleanupCallback) {
       if (err) throw err;
 
@@ -35,11 +33,25 @@ export default function (context) {
     });
   }
 
+  const removeScript = (token) => {
+    const wpPluginFilename = 'toybox.php';
+    const wpPluginPath = path.join( context.electron.remote.process.resourcesPath , wpPluginFilename);
+    const sitePath = globalSitePath;
+    const muPluginsPath = path.join(sitePath, 'app', 'public','wp-content', 'mu-plugins');
+    const pluginFilePath = path.join(muPluginsPath, wpPluginFilename);
+    tmp.file({postfix: '.php'}, function (err, path, fd, cleanupCallback) {
+      if (err) throw err;
+
+      fs.writeFileSync(path, ``)
+      fs.copySync(path, pluginFilePath);
+    });
+  }
+
   hooks.addContent('routesSiteInfo', (menu) => {
     return (
       <Route notifier={context.notifier} key="site-info-ports" path="/site-info/:siteID/ports"
         render={(props) => {
-          return <AppProvider {...props} siteId={menu.routeChildrenProps.site.id} context={context} addToken={addToken}/>
+          return <AppProvider {...props} site={menu.routeChildrenProps.site} siteId={menu.routeChildrenProps.site.id} context={context} addToken={addToken} removeScript={removeScript}/>
         }}
       />
     )

@@ -15,7 +15,7 @@ export default class AppProvider extends React.Component {
 		return (
 			<Provider store={store}>
 				<ThemeProvider theme={theme}>
-					<App addToken={this.props.addToken} context={this.props.context} siteId={this.props.siteId}/>
+					<App addToken={this.props.addToken} context={this.props.context} siteId={this.props.siteId} site={this.props.site} removeScript={this.props.removeScript}/>
 				</ThemeProvider>
 			</Provider>
 		);
