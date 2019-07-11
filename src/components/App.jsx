@@ -5,9 +5,14 @@ import Box from './Box'
 import Text from './Text'
 import { remote } from 'electron';
 import { FlyDropdown, Header, Divider, Card, FlySelect, Button, InputPasswordToggle, BigLoader, Switch } from '@getflywheel/local-components';
-import confirm from 'local/renderer/confirm';
+import styled from 'styled-components';
 
-const { dialog } = remote;
+const Label = styled(Box)`
+font-weight: 600;
+padding-bottom: 6px;
+`;
+
+
 
 export default class App extends React.Component {
   constructor (props) {
@@ -141,11 +146,11 @@ export default class App extends React.Component {
     const showSaveButton = (this.state.tempProjectToken && this.state.tempProjectToken != this.state.projectToken)
 
     const projectSelect = (
-      <Box my='12'>
+      <Box my='12' flex aic>
         <Box>
           <FlySelect value={this.state.tempProjectToken || this.state.projectToken} style={{ width: '350px' }} options={this.projectOptions()} onChange={(val) => this.setState({ tempProjectToken: val, changedProject: true })} />
         </Box>
-        <Box mt='36px' style={{visibility: showSaveButton ? 'visible' : 'hidden'}}>
+        <Box ml='36px' style={{visibility: showSaveButton ? 'visible' : 'hidden'}}>
           <Button onClick={this.setProject} className="sm __Pill __Green">Update</Button>
         </Box>
       </Box>
@@ -182,38 +187,35 @@ export default class App extends React.Component {
           projectDetails = (
             <Box>
               <Box pb='12'>
+                <Label>PROJECT: </Label>
                 <Box>
-                  PROJECT:
-                </Box>
-                <Box pt='4'>
-                    {project.name}
-                    &nbsp;
-                    <a href={project.dashboardUrl} target="_blank">
-                      View
-                    </a>
+                  <a href={project.dashboardUrl} target="_blank">
+                    <Box flex aic>
+                      <Box>
+                        {project.name}
+                      </Box>
+                      <Box>
+                        <img src="https://img.icons8.com/ios-glyphs/30/000000/external-link.png" height="16px" width="16px" />
+                      </Box>
+                    </Box>
+                  </a>
                 </Box>
               </Box>
               <Box pb='12'>
+                <Label> ORGANIZATION: </Label>
                 <Box>
-                  ORGANIZATION:
-                </Box>
-                <Box pt='4'>
                   {project.companyName}
                 </Box>
               </Box>
               <Box pb='12'>
+                <Label> UPDATED: </Label>
                 <Box>
-                  UPDATED:
-                </Box>
-                <Box pt='4'>
                   {project.updatedAt}
                 </Box>
               </Box>
               <Box pb='12'>
+                <Label> NUMBER OF TASKS: </Label>
                 <Box>
-                  NUMBER OF TASKS:
-                </Box>
-                <Box pt='4'>
                   {project.taskCount} unresolved
                 </Box>
               </Box>
@@ -221,11 +223,7 @@ export default class App extends React.Component {
           )
         }
 
-        const details = (
-          <Box pl='60px' borderLeft='1px solid gray'>
-            {projectDetails}
-          </Box>
-        )
+        const details =  projectDetails
         view = (
           <Box flex between>
             <Box pr='140px'>
@@ -239,8 +237,8 @@ export default class App extends React.Component {
                 this.setState({enabled: checked})
               }}/>
               {this.state.enabled && projectSelect}
+              {this.state.enabled && details}
             </Box>
-            {this.state.enabled && details}
           </Box>
         );
       }
