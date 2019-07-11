@@ -1,9 +1,9 @@
 {
   "name": "toybox",
-  "productName": "Toybox",
-  "version": "1.1.0",
-  "author": "MAHKO CORP. d/b/a Toybox",
-  "slug": "ports",
+  "productName": "Visual Feedback Tool",
+  "version": "1.0.0",
+  "author": "Toybox",
+  "slug": "toybox",
   "keywords": [
     "local-addon"
   ],
