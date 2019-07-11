@@ -167,7 +167,7 @@ export default class App extends React.Component {
     let view = signIn;
     let title = 'Sign into your account';
     const site = this.props.site;
-    let description = <p>Don't have a Toybox account? <a target='_blank' href={`https://app.toyboxsystems.com?flywheel=true&siteName=${site.name}&siteDomain=${site.domain}`}>Create one here for free</a></p>;
+    let description = <p>Don't have a Toybox account? <a target='_blank' href={`https://app.toyboxsystems.com/users/sign_up?flywheel=true&siteName=${site.name}&siteDomain=${site.domain}`}>Create one here for free</a></p>;
 
     if (this.props.authed) {
       if (this.props.projects.length == 0) {
