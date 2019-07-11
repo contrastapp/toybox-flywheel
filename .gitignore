@@ -16,5 +16,3 @@ node_modules
 ### Builds ###
 lib
 *.tgz
-package-lock.json
-package-lock.json
