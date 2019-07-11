@@ -39,12 +39,7 @@ export default function (context) {
     const sitePath = globalSitePath;
     const muPluginsPath = path.join(sitePath, 'app', 'public','wp-content', 'mu-plugins');
     const pluginFilePath = path.join(muPluginsPath, wpPluginFilename);
-    tmp.file({postfix: '.php'}, function (err, path, fd, cleanupCallback) {
-      if (err) throw err;
-
-      fs.writeFileSync(path, ``)
-      fs.copySync(path, pluginFilePath);
-    });
+    fs.unlinkSync(pluginFilePath)
   }
 
   hooks.addContent('routesSiteInfo', (menu) => {
