@@ -9,7 +9,8 @@ import styled from 'styled-components';
 
 const Label = styled(Box)`
 font-weight: 600;
-padding-bottom: 6px;
+padding-top: 6px;
+padding-bottom: 4px;
 `;
 
 
@@ -187,7 +188,7 @@ export default class App extends React.Component {
           projectDetails = (
             <Box>
               <Box pb='12'>
-                <Label>PROJECT: </Label>
+                <Label>Project: </Label>
                 <Box>
                   <a href={project.dashboardUrl} target="_blank">
                     <Box flex aic>
@@ -202,19 +203,19 @@ export default class App extends React.Component {
                 </Box>
               </Box>
               <Box pb='12'>
-                <Label> ORGANIZATION: </Label>
+                <Label> Organization: </Label>
                 <Box>
                   {project.companyName}
                 </Box>
               </Box>
               <Box pb='12'>
-                <Label> UPDATED: </Label>
+                <Label> Updated: </Label>
                 <Box>
                   {project.updatedAt}
                 </Box>
               </Box>
               <Box pb='12'>
-                <Label> NUMBER OF TASKS: </Label>
+                <Label> Number of Tasks: </Label>
                 <Box>
                   {project.taskCount} unresolved
                 </Box>
