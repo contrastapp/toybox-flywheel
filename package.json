@@ -1,9 +1,9 @@
 {
   "name": "toybox",
   "productName": "Toybox: Visual Website Feedback",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "Toybox",
-  "slug": "toybox",
+  "slug": "ports",
   "keywords": [
     "local-addon"
   ],
