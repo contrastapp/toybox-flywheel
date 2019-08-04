@@ -113,7 +113,7 @@ export default class App extends React.Component {
 
   render () {
     const signIn = (
-      <div>
+      <Box pt='30px'>
         <div className="FormRow">
           <div className='FormField'>
             <label>Email</label>
@@ -128,7 +128,9 @@ export default class App extends React.Component {
                   API Key
                 </Box>
                 <Box>
-                  <a href='https://app.toyboxsystems.com/settings?api=true' target='_blank'>Find your key here</a>
+                  <a href='https://app.toyboxsystems.com/settings?api=true' target='_blank'>
+                    (Find your key here)
+                  </a>
                 </Box>
               </Box>
             </label>
@@ -136,22 +138,27 @@ export default class App extends React.Component {
           </div>
         </div>
         <Box pt='16px'>
-          <Button onClick={this.signIn} className="__Pill __Green">Sign In</Button>
+          <Button onClick={this.signIn} className="__Pill __Green">Log In</Button>
         </Box>
         {
-          this.state.error && <Text warning>Error logging in</Text>
+          this.state.error && <Box pt='12'><Header fontColor='red' fontSize='s'>Error logging in</Header></Box>
         }
-      </div>
+      </Box>
     );
 
     const showSaveButton = (this.state.tempProjectToken && this.state.tempProjectToken != this.state.projectToken)
 
     const projectSelect = (
-      <Box my='12' flex aic>
+      <Box my='12' >
+        <Box pb='8'>
+          <Header fontSize='s'>
+            Select your Toybox project
+          </Header>
+        </Box>
         <Box>
           <FlySelect value={this.state.tempProjectToken || this.state.projectToken} style={{ width: '350px' }} options={this.projectOptions()} onChange={(val) => this.setState({ tempProjectToken: val, changedProject: true })} />
         </Box>
-        <Box ml='36px' style={{visibility: showSaveButton ? 'visible' : 'hidden'}}>
+        <Box mt='12' style={{visibility: showSaveButton ? 'visible' : 'hidden'}}>
           <Button onClick={this.setProject} className="sm __Pill __Green">Update</Button>
         </Box>
       </Box>
@@ -160,14 +167,12 @@ export default class App extends React.Component {
     const signOut = <Button onClick={this.signOut} className="__GrayOutline">Sign Out From Toybox</Button>;
 
     const settings = (
-    <FlyDropdown position="bottom" items={[
-        {
-          label: 'Sign Out',
-          onClick: this.signOut,
-        },
-      ]}>
-      <Button>Settings</Button>
-    </FlyDropdown>
+      <Box flex aic >
+        <Box pr='8'>
+          {this.props.email}
+        </Box>
+        <a onClick={this.signOut}>Log out</a>
+      </Box>
     )
 
     let view = signIn;
@@ -179,7 +184,6 @@ export default class App extends React.Component {
       if (this.props.projects.length == 0) {
         view = <BigLoader />;
       } else {
-        title = 'Configure Toybox';
         description = 'Select a project to start leaving feedback on your site.';
         const project = _.keyBy(this.props.projects, 'hashId')[this.state.projectToken]
         let projectDetails;
@@ -188,46 +192,30 @@ export default class App extends React.Component {
           projectDetails = (
             <Box>
               <Box pb='12'>
-                <Label>Project: </Label>
-                <Box>
-                  <a href={project.dashboardUrl} target="_blank">
-                    <Box flex aic>
-                      <Box>
-                        {project.name}
-                      </Box>
-                      <Box>
-                        <img src="https://img.icons8.com/ios-glyphs/30/000000/external-link.png" height="16px" width="16px" />
-                      </Box>
-                    </Box>
-                  </a>
-                </Box>
-              </Box>
-              <Box pb='12'>
-                <Label> Organization: </Label>
-                <Box>
-                  {project.companyName}
-                </Box>
-              </Box>
-              <Box pb='12'>
-                <Label> Updated: </Label>
-                <Box>
-                  {project.updatedAt}
-                </Box>
-              </Box>
-              <Box pb='12'>
-                <Label> Number of Tasks: </Label>
-                <Box>
+                <Label>Current tasks: </Label>
+                <Header fontSize='m'>
                   {project.taskCount} unresolved
+                </Header>
+                <Box pt='8'>
+                  <Header fontSize='xs'>
+                    Updated {project.updatedAt}
+                  </Header>
                 </Box>
               </Box>
+              <a href={project.dashboardUrl} target="_blank">
+                <Button onClick={_.noop} className="__GrayOutline">Go To Project</Button>
+              </a>
             </Box>
           )
         }
 
         const details =  projectDetails
         view = (
-          <Box flex between>
-            <Box pr='140px'>
+          <Box>
+            <Box my='30px' flex between width='100%'>
+              <Header fontSize='s'>
+                Connect your Local site to Toybox
+              </Header>
               <Switch label="Show Toybox on this site" checked={this.state.enabled} tiny={true} name='enabled' onChange={(name, checked) =>  {
                 if (checked) {
                   this.setProject()
@@ -237,34 +225,36 @@ export default class App extends React.Component {
                 this.props.context.fileSystemJetpack.write(this.enabledPath(), `{"enabled": "${checked}"}`);
                 this.setState({enabled: checked})
               }}/>
+          </Box>
+          <Divider marginSize="m"/>
+          <Box flex>
+            <Box>
               {this.state.enabled && projectSelect}
+            </Box>
+            <Box borderLeft='1px solid' borderColor='gray.15' pl='30px' ml='30px'>
               {this.state.enabled && details}
             </Box>
           </Box>
+        </Box>
         );
       }
     }
 
 
     return (
-      <div style={{ padding: 32, paddingTop: 12, flex: '1', overflowY: 'auto' }}>
-        <Card
-          contentTitle={
-            <Box flex aic between>
-              { title }
-              <Box>
-                {this.props.authed && settings}
-              </Box>
-            </Box>
-          }
-          contentDescription={description}
-          footer={(
-            <Fragment>
-              {view}
-            </Fragment>
-          )}
-        />
-      </div>
+      <Box>
+        <Box flex aic style={{backgroundColor: '#F4F6F8'}} width='100%' between>
+          <Box ml='30px' py='12'>
+            Toybox
+          </Box>
+          <Box mr='20px' py='12'>
+            {this.props.authed && settings}
+          </Box>
+        </Box>
+        <Box p='30px' pt='0px'>
+          {view}
+        </Box>
+      </Box>
     );
 
   }
