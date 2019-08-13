@@ -158,7 +158,7 @@ export default class App extends React.Component {
     const showSaveButton = (this.state.tempProjectToken && this.state.tempProjectToken != this.state.projectToken)
 
     const projectSelect = (
-      <Box my='12' >
+      <Box>
         <Box pb='8'>
           <Header fontSize='14px'>
             Select your Toybox project
@@ -195,7 +195,7 @@ export default class App extends React.Component {
 
     if (this.props.authed) {
       if (this.props.projects.length == 0) {
-        view = <BigLoader />;
+        view = <Box pt='48px'><BigLoader /></Box>;
       } else {
         description = 'Select a project to start leaving feedback on your site.';
         const project = _.keyBy(this.props.projects, 'hashId')[this.state.projectToken]
@@ -239,12 +239,14 @@ export default class App extends React.Component {
                 this.setState({enabled: checked})
               }}/>
           </Box>
-          <Divider marginSize="m"/>
+          <Box pb='10px'>
+            <Divider marginSize="m"/>
+          </Box>
           <Box flex>
-            <Box>
+            <Box borderRight='1px solid' borderColor='gray.15' pr='30px' mr='30px'>
               {this.state.enabled && projectSelect}
             </Box>
-            <Box borderLeft='1px solid' borderColor='gray.15' pl='30px' ml='30px'>
+            <Box>
               {this.state.enabled && details}
             </Box>
           </Box>
