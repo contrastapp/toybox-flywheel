@@ -156,7 +156,11 @@ export default class App extends React.Component {
           </Header>
         </Box>
         <Box>
+        <div className="FormRow">
+          <div className='FormField'>
           <FlySelect value={this.state.tempProjectToken || this.state.projectToken} style={{ width: '350px' }} options={this.projectOptions()} onChange={(val) => this.setState({ tempProjectToken: val, changedProject: true })} />
+        </div>
+        </div>
         </Box>
         <Box mt='12' style={{visibility: showSaveButton ? 'visible' : 'hidden'}}>
           <Button onClick={this.setProject} className="sm __Pill __Green">Update</Button>
