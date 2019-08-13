@@ -8,11 +8,16 @@ import { Banner, FlyDropdown, Header, Divider, Card, FlySelect, Button, InputPas
 import styled from 'styled-components';
 
 const Label = styled(Box)`
-font-weight: 600;
+font-weight: 500;
 padding-top: 6px;
-padding-bottom: 4px;
+padding-bottom: 10px;
 `;
 
+const SelectWrapper = styled(Box)`
+& .FlySelect__Right .FlySelect__SecondaryText {
+ padding-right: 20px;
+}
+`;
 
 
 export default class App extends React.Component {
@@ -115,9 +120,14 @@ export default class App extends React.Component {
     const signIn = (
       <Box>
         <Box maxWidth='350px' pt='30px'>
+          <Box pb='30px'>
+            <Header fontSize='s'>
+              Log in to Toybox
+            </Header>
+          </Box>
           <div className="FormRow">
             <div className='FormField'>
-              <label>Email</label>
+              <label><Box fontWeight='500'>Email</Box></label>
               <input width='360' onChange={(e) => this.setState({ email: e.target.value })} />
             </div>
           </div>
@@ -125,7 +135,7 @@ export default class App extends React.Component {
             <div className='FormField'>
               <label>
                 <Box flex aic>
-                  <Box mr='4'>
+                  <Box mr='4' fontWeight='500'>
                     API Key
                   </Box>
                   <Box>
@@ -138,7 +148,7 @@ export default class App extends React.Component {
               <InputPasswordToggle onChange={(e) => this.setState({ password: e.target.value })} />
             </div>
           </div>
-          <Box pt='16px'>
+          <Box pt='10px'>
             <Button onClick={this.signIn} className="__Pill __Green">Log In</Button>
           </Box>
         </Box>
@@ -150,19 +160,19 @@ export default class App extends React.Component {
     const projectSelect = (
       <Box my='12' >
         <Box pb='8'>
-          <Header fontSize='s'>
+          <Header fontSize='14px'>
             Select your Toybox project
           </Header>
         </Box>
-        <Box>
-        <div className="FormRow">
-          <div className='FormField'>
-          <FlySelect value={this.state.tempProjectToken || this.state.projectToken} style={{ width: '350px' }} options={this.projectOptions()} onChange={(val) => this.setState({ tempProjectToken: val, changedProject: true })} />
-        </div>
-        </div>
-        </Box>
+        <SelectWrapper>
+          <div className="FormRow">
+            <div className='FormField'>
+              <FlySelect value={this.state.tempProjectToken || this.state.projectToken} style={{ width: '350px' }} options={this.projectOptions()} onChange={(val) => this.setState({ tempProjectToken: val, changedProject: true })} />
+            </div>
+          </div>
+        </SelectWrapper>
         <Box mt='12' >
-          <Button disabled={!showSaveButton} onClick={this.setProject} className="sm __Pill __Green">Update</Button>
+          <Button disabled={!showSaveButton} onClick={this.setProject} className="xs __Pill __Green">Update</Button>
         </Box>
       </Box>
     );
@@ -171,10 +181,10 @@ export default class App extends React.Component {
 
     const settings = (
       <Box flex aic >
-        <Box pr='8'>
+        <Box pr='8' fontWeight='300'>
           {this.props.email}
         </Box>
-        <a onClick={this.signOut}>Log out</a>
+        <a onClick={this.signOut} style={{textDecoration: 'underline'}}>Log out</a>
       </Box>
     )
 
@@ -194,13 +204,13 @@ export default class App extends React.Component {
           let title = 'Project';
           projectDetails = (
             <Box>
-              <Box pb='12'>
+              <Box pb='20px'>
                 <Label>Current tasks: </Label>
-                <Header fontSize='m'>
+                <Header fontSize='s'>
                   {project.taskCount} unresolved
                 </Header>
                 <Box pt='8'>
-                  <Header fontSize='xs'>
+                  <Header fontWeight='300' fontSize='xs'>
                     Updated {project.updatedAt}
                   </Header>
                 </Box>
@@ -246,8 +256,8 @@ export default class App extends React.Component {
 
     return (
       <Box>
-        <Box flex aic style={{backgroundColor: '#e4e3e4'}} width='100%' between>
-          <Box ml='30px' py='12'>
+        <Box flex aic style={{backgroundColor: '#E7E7E7'}} width='100%' between>
+          <Box fontWeight='700' ml='30px' py='12'>
             Toybox
           </Box>
           <Box mr='20px' py='12'>
