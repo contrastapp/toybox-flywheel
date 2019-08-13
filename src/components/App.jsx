@@ -162,8 +162,8 @@ export default class App extends React.Component {
         </div>
         </div>
         </Box>
-        <Box mt='12' style={{visibility: showSaveButton ? 'visible' : 'hidden'}}>
-          <Button onClick={this.setProject} className="sm __Pill __Green">Update</Button>
+        <Box mt='12' >
+          <Button disabled={!showSaveButton} onClick={this.setProject} className="sm __Pill __Green">Update</Button>
         </Box>
       </Box>
     );
