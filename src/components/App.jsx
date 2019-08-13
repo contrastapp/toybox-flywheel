@@ -113,7 +113,7 @@ export default class App extends React.Component {
 
   render () {
     const signIn = (
-      <Box pt='30px'>
+      <Box maxWidth='350px' pt='30px'>
         <div className="FormRow">
           <div className='FormField'>
             <label>Email</label>
