@@ -4,7 +4,7 @@ import _ from 'lodash';
 import Box from './Box'
 import Text from './Text'
 import { remote } from 'electron';
-import { FlyDropdown, Header, Divider, Card, FlySelect, Button, InputPasswordToggle, BigLoader, Switch } from '@getflywheel/local-components';
+import { Banner, FlyDropdown, Header, Divider, Card, FlySelect, Button, InputPasswordToggle, BigLoader, Switch } from '@getflywheel/local-components';
 import styled from 'styled-components';
 
 const Label = styled(Box)`
@@ -113,36 +113,35 @@ export default class App extends React.Component {
 
   render () {
     const signIn = (
-      <Box maxWidth='350px' pt='30px'>
-        <div className="FormRow">
-          <div className='FormField'>
-            <label>Email</label>
-            <input width='360' onChange={(e) => this.setState({ email: e.target.value })} />
+      <Box>
+        <Box maxWidth='350px' pt='30px'>
+          <div className="FormRow">
+            <div className='FormField'>
+              <label>Email</label>
+              <input width='360' onChange={(e) => this.setState({ email: e.target.value })} />
+            </div>
           </div>
-        </div>
-        <div className="FormRow">
-          <div className='FormField'>
-            <label>
-              <Box flex aic>
-                <Box mr='4'>
-                  API Key
+          <div className="FormRow">
+            <div className='FormField'>
+              <label>
+                <Box flex aic>
+                  <Box mr='4'>
+                    API Key
+                  </Box>
+                  <Box>
+                    <a href='https://app.toyboxsystems.com/settings?api=true' target='_blank'>
+                      (Find your key here)
+                    </a>
+                  </Box>
                 </Box>
-                <Box>
-                  <a href='https://app.toyboxsystems.com/settings?api=true' target='_blank'>
-                    (Find your key here)
-                  </a>
-                </Box>
-              </Box>
-            </label>
-            <InputPasswordToggle onChange={(e) => this.setState({ password: e.target.value })} />
+              </label>
+              <InputPasswordToggle onChange={(e) => this.setState({ password: e.target.value })} />
+            </div>
           </div>
-        </div>
-        <Box pt='16px'>
-          <Button onClick={this.signIn} className="__Pill __Green">Log In</Button>
+          <Box pt='16px'>
+            <Button onClick={this.signIn} className="__Pill __Green">Log In</Button>
+          </Box>
         </Box>
-        {
-          this.state.error && <Box pt='12'><Header fontColor='red' fontSize='s'>Error logging in</Header></Box>
-        }
       </Box>
     );
 
@@ -247,7 +246,7 @@ export default class App extends React.Component {
 
     return (
       <Box>
-        <Box flex aic style={{backgroundColor: '#F4F6F8'}} width='100%' between>
+        <Box flex aic style={{backgroundColor: '#e4e3e4'}} width='100%' between>
           <Box ml='30px' py='12'>
             Toybox
           </Box>
@@ -255,6 +254,13 @@ export default class App extends React.Component {
             {this.props.authed && settings}
           </Box>
         </Box>
+        {
+          this.state.error && (
+            <Banner variant="error" icon="warning" >
+              <strong>Your login credentials were incorrect!</strong> Please check for accuracy and try again.
+            </Banner>
+          )
+        }
         <Box p='30px' pt='0px'>
           {view}
         </Box>
