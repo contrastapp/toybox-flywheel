@@ -4,7 +4,7 @@ import _ from 'lodash';
 import Box from './Box'
 import Text from './Text'
 import { remote } from 'electron';
-import { Banner, FlyDropdown, Header, Divider, Card, FlySelect, Button, InputPasswordToggle, BigLoader, Switch } from '@getflywheel/local-components';
+import { TitleBar, Banner, FlyDropdown, Header, Divider, Card, FlySelect, Button, InputPasswordToggle, BigLoader, Switch } from '@getflywheel/local-components';
 import styled from 'styled-components';
 
 const Label = styled(Box)`
@@ -258,14 +258,9 @@ export default class App extends React.Component {
 
     return (
       <Box>
-        <Box flex aic style={{backgroundColor: '#E7E7E7'}} width='100%' between>
-          <Box fontWeight='700' ml='30px' py='12'>
-            Toybox
-          </Box>
-          <Box mr='20px' py='12'>
-            {this.props.authed && settings}
-          </Box>
-        </Box>
+          <TitleBar title='Toybox'>
+              {this.props.authed && settings}
+          </TitleBar>
         {
           this.state.error && (
             <Banner variant="error" icon="warning" >
